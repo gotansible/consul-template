@@ -1,0 +1,38 @@
+---
+
+- name: consul template - download
+  get_url:
+    url={{ consul_template_uri }} 
+    dest={{ consul_template_download_folder }}
+  register: consul_template_was_downloaded
+
+- name: consul template - group
+  group:
+    name={{ consul_template_group }}
+    state=present
+
+- name: consul template - user
+  user:
+    name={{ consul_template_user }}
+    group={{ consul_template_group }}
+
+- name: consul template - directories
+  file:
+    state=directory
+    path={{ item }}
+    owner={{ consul_template_user }}
+    group={{ consul_template_group }}
+  with_items:
+    - "{{ consul_template_install_dir }}"
+    - "{{ consul_template_config_dir }}"
+    - "{{ consul_template_log_dir }}"
+
+- name: copy and unpack
+  unarchive:
+    src={{ consul_template_download_folder }}/{{ consul_template_archive }}
+    dest={{ consul_template_install_dir }}
+    copy=no
+  when: consul_was_downloaded|changed
+
+
+

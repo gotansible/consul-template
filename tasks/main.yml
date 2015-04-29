@@ -1,0 +1,18 @@
+---
+
+- include: depend.yml
+
+- include: install_binary.yml
+
+- name: setup consul configs
+  include: config.yml
+
+- name: consul - service
+  include: runit_service.yml
+  vars:
+    service_name: "{{ consul_template_service_name }}"
+    service_user: "{{ consul_template_user }}"
+    service_command: "{{ consul_template_install_dir }}/consul-template -config={{ consul_template_config_path}}"
+    service_env_vars:
+      GOMAXPROCS: "{{ansible_processor_cores + 1}}"
+

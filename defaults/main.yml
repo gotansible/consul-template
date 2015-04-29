@@ -1,0 +1,12 @@
+# install
+consul_template_version: 0.8.0
+consul_template_archive: "consul-template_{{ consul_template_version }}_linux_amd64.tar.gz"
+consul_template_uri: "https://github.com/hashicorp/consul-template/releases/download/v{{ consul_template_version}}/{{ consul_template_archive }}"
+consul_template_download_folder: /tmp
+
+  #service settings
+consul_template_service_name: consul-template
+consul_template_binary: consul-template
+consul_template_user:  "{{ consul_template_service_name }}"
+consul_template_group: "{{ consul_template_service_name }}"
+
