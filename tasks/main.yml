@@ -9,10 +9,12 @@
 
 - name: consul - service
   include: runit_service.yml
+  tags:
+    - service
   vars:
     service_name: "{{ consul_template_service_name }}"
     service_user: "{{ consul_template_user }}"
-    service_command: "{{ consul_template_install_dir }}/consul-template -config={{ consul_template_config_path}}"
+    service_command: "{{ consul_template_install_dir }}/current/{{consul_template_binary}} -config={{ consul_template_config_file_path }}"
     service_env_vars:
-      GOMAXPROCS: "{{ansible_processor_cores + 1}}"
+      GOMAXPROCS: "{{ ansible_processor_cores + 1}}"
 

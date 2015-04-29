@@ -1,38 +1,44 @@
 ---
 
-- name: consul template - download
-  get_url:
-    url={{ consul_template_uri }} 
-    dest={{ consul_template_download_folder }}
-  register: consul_template_was_downloaded
-
-- name: consul template - group
+- name: install - group
   group:
     name={{ consul_template_group }}
     state=present
 
-- name: consul template - user
+- name: install - user
   user:
     name={{ consul_template_user }}
     group={{ consul_template_group }}
 
-- name: consul template - directories
+- name: install - directories
   file:
     state=directory
     path={{ item }}
     owner={{ consul_template_user }}
     group={{ consul_template_group }}
   with_items:
-    - "{{ consul_template_install_dir }}"
+    - "{{ consul_template_install_dir }}/current"
     - "{{ consul_template_config_dir }}"
     - "{{ consul_template_log_dir }}"
 
-- name: copy and unpack
+- name: install - download
+  get_url:
+    url={{ consul_template_uri }} 
+    dest={{ consul_template_download_folder }}
+  register: consul_template_was_downloaded
+
+- name: install - copy and unpack
   unarchive:
-    src={{ consul_template_download_folder }}/{{ consul_template_archive }}
+    src={{ consul_template_download_folder }}/{{ consul_template_archive }}{{ consul_template_archive_ext }}
     dest={{ consul_template_install_dir }}
     copy=no
-  when: consul_was_downloaded|changed
+  when: consul_template_was_downloaded|changed
 
-
+- name: install - link current
+  file:
+    src={{ consul_template_install_dir }}/{{ consul_template_archive }}/{{consul_template_binary}}
+    dest={{ consul_template_install_dir }}/current/{{consul_template_binary}}
+    state=link
+    force=yes
+  when: consul_template_was_downloaded|changed
 

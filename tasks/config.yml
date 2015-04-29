@@ -1,6 +1,6 @@
 ---
 
-- name: consul template - configuration
+- name: config - setup
   template:
     src=consul-template.conf.j2
     dest={{consul_template_config_file_path}}
@@ -8,4 +8,4 @@
     group={{consul_template_group}}
     mode=0644
     backup=yes
-  notify: restart consul template
+  notify: restart consul-template

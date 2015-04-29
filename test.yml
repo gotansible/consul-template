@@ -1,0 +1,11 @@
+---
+- hosts: all
+  sudo: true
+
+  vars:
+    consul_template_token: ""
+
+  roles:
+    - {role: consul-template }
+
+

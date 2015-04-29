@@ -22,13 +22,6 @@ ssl {
 }
 {% endif %}
 
-{% if consul_template_syslog_enable %}
-syslog {
-  enabled = true
-  facility = "{{consul_template_syslog_facility}}"
-}
-{% endif %}
-
 {% for t in consul_template_config_file %}
 # {{t.name}}
 template {

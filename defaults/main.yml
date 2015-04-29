@@ -1,12 +1,36 @@
 # install
 consul_template_version: 0.8.0
-consul_template_archive: "consul-template_{{ consul_template_version }}_linux_amd64.tar.gz"
-consul_template_uri: "https://github.com/hashicorp/consul-template/releases/download/v{{ consul_template_version}}/{{ consul_template_archive }}"
+consul_template_archive: "consul-template_{{ consul_template_version }}_linux_amd64"
+consul_template_archive_ext: ".tar.gz"
+consul_template_uri: "https://github.com/hashicorp/consul-template/releases/download/v{{ consul_template_version}}/{{ consul_template_archive }}{{ consul_template_archive_ext }}"
 consul_template_download_folder: /tmp
 
-  #service settings
+#service settings
 consul_template_service_name: consul-template
 consul_template_binary: consul-template
 consul_template_user:  "{{ consul_template_service_name }}"
 consul_template_group: "{{ consul_template_service_name }}"
+
+# config
+
+consul_template_consul_addr: 127.0.0.1:8500
+consul_template_token: abcd1234
+consul_template_retry: 10s
+consul_template_max_stale: 10m
+
+consul_template_auth_enable: false
+consul_template_username: user
+consul_template_password: password
+
+consul_template_ssl_enable: false
+consul_template_ssl_verify: false
+consul_template_ssl_cert: /path/to/client/cert.pem
+consul_template_ssl_ca_cert: /path/to/ca/cert.pem
+
+consul_template_config_file: []
+  #  - name: stub
+  #    source: "{{consul_template_stub_template}}"
+  #    destination: '/etc/haproxy/haproxy.cfg'
+  #    command: 'service stub restart'
+
 

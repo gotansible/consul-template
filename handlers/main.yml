@@ -1,4 +1,4 @@
 ---
-- name: restart consul template
-  runit: name={{ consul_service_name }} state=restarted
+- name: restart {{ consul_template_service_name }}
+  runit: name={{ consul_template_service_name }} state=restarted
 
