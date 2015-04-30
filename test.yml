@@ -3,9 +3,12 @@
   sudo: true
 
   vars:
-    consul_template_token: ""
+    #consul_template_consul_addr: "192.168.50.4"
+    consul_start_join: ["192.168.50.4"]
+    consul_bind_address: "192.168.50.10"
 
   roles:
+    - {role: consul}
     - {role: consul-template }
 
 
