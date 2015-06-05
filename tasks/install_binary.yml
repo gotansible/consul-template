@@ -4,11 +4,14 @@
   group:
     name={{ consul_template_group }}
     state=present
+    system=yes
 
 - name: install - user
   user:
     name={{ consul_template_user }}
     group={{ consul_template_group }}
+    system=yes
+    createhome=no
 
 - name: install - directories
   file:

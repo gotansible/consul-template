@@ -1,0 +1,14 @@
+---
+
+- name: service - setup and run
+  runit:
+    name: "{{ consul_template_service_name }}"
+    enabled: yes
+    state: up
+    timeout: 10
+    user: "{{ consul_template_user }}"
+    command: "{{ consul_template_install_dir }}/current/{{consul_template_binary}} -config={{ consul_template_config_file_path }}"
+    env_vars:
+      - GOMAXPROCS: "{{ ansible_processor_cores + 1}}"
+  register: consul_template_service_status
+
