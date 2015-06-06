@@ -27,7 +27,7 @@ consul_template_ssl_verify: false
 consul_template_ssl_cert: /path/to/client/cert.pem
 consul_template_ssl_ca_cert: /path/to/ca/cert.pem
 
-consul_template_config_file: []
+consul_template_config: []
   #  - name: stub
   #    source: "{{consul_template_stub_template}}"
   #    destination: '/etc/haproxy/haproxy.cfg'

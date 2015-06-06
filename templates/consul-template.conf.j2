@@ -22,7 +22,7 @@ ssl {
 }
 {% endif %}
 
-{% for t in consul_template_config_file %}
+{% for t in consul_template_config %}
 # {{t.name}}
 template {
   source = "{{t.source}}"
