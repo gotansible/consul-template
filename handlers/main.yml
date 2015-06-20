@@ -1,6 +1,11 @@
 ---
 
 - name: restart consul-template
-  runit: name={{ consul_template_service_name }} state=up timeout=9 action=restart
+  runit: 
+    name={{ consul_template_service_name }} 
+    state=up 
+    enabled=true
+    timeout=9 
+    action=restart
   when: not consul_template_service_status.restarted
 
