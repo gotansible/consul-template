@@ -1,7 +1,3 @@
 ---
 # aggregted vars 
-consul_template_install_dir : "/opt/{{ consul_template_service_name }}"
-consul_template_config_dir : "/etc/{{  consul_template_service_name }}"
-consul_template_log_dir : "/var/log/{{ consul_template_service_name }}"
-consul_template_config_file_path: "{{ consul_template_config_dir }}/consul-template.conf"
 

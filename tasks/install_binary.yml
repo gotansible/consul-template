@@ -35,7 +35,6 @@
     src={{ consul_template_download_folder }}/{{ consul_template_archive }}{{ consul_template_archive_ext }}
     dest={{ consul_template_install_dir }}
     copy=no
-  when: consul_template_was_downloaded|changed
 
 - name: install - link current
   file:
@@ -43,5 +42,11 @@
     dest={{ consul_template_install_dir }}/current/{{consul_template_binary}}
     state=link
     force=yes
-  when: consul_template_was_downloaded|changed
+
+- name: install - link bin dir
+  file:
+    src={{ consul_template_install_dir }}/current/{{consul_template_binary}}
+    dest=/usr/local/bin/consul-template
+    state=link
+    force=yes
 
